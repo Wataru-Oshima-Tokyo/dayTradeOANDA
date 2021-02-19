@@ -21,7 +21,6 @@ import requests
 import psycopg2
 import smtplib
 from email.mime.text import MIMEText
-from datetime import datetime
 
 
 class sendEmailtoTheUser:
