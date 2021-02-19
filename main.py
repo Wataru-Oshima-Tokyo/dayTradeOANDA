@@ -53,7 +53,6 @@ class sendEmailtoTheUser:
             send_mail(msg)
             print("successfully emailed to the user")
 
-
 class WriteDBAndReport:
     def get_connection(self):
         return psycopg2.connect(
@@ -231,7 +230,6 @@ class WriteDBAndReport:
         cur.close()
         # データベースへのコネクションを閉じる。(必須)
         conn.close()
-
 
 class decisionMaking:
     def readDataForInverse(self, targethour):
@@ -493,25 +491,24 @@ class decisionMaking:
         title = "現在の勝率"
         sendEmailtoTheUser.main(showResult, title)
 
-
 class monitorExchangeRate:
     def extract(self):
         headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36'}
         url = 'https://info.finance.yahoo.co.jp/fx/detail/?code=usdjpy'
         r = requests.get(url, headers)
-        soup = BeautifulSoup(r.content, 'html.parser')
-        return soup
+        self.soup = BeautifulSoup(r.content, 'html.parser')
+        return self.soup
 
-    def transform(self,soup,exr,ts, num):
+    def transform(self,soup,exr,ts,num):
         Rate = self.soup.find('dd', id = 'USDJPY_detail_bid').text.strip()
         try:
             RateInt =float(Rate)
-            self.exr.append(RateInt)
-            self.ts.append(self.num)
+            exr.append(RateInt)
+            ts.append(num)
         except:
-            self.num -= 1
+            num -= 1
             print("cannot convert from rateInt to int")
-        return self.num
+        return num
         
 
     def pearsonCorrelationCoeffcient(self,classList):
@@ -550,8 +547,6 @@ class monitorExchangeRate:
             print(r)
         return r
 
-
-
     def job1(self):
         now = datetime.now()
         todays_date = str(now.strftime("%Y%m%d"))
@@ -564,17 +559,17 @@ class monitorExchangeRate:
         target_date = int(now.strftime("%Y%m%d")) +1
         todays_dateInt =int(todays_date)
         i= int(now.strftime("%M"))*20
-        overtime =i
+        overtime = i
         while (todays_dateInt != target_date):
             now = datetime.now()
             todays_dateInt =int(now.strftime("%Y%m%d"))
             i+=1
-            c=extract()
+            c=self.extract()
             passedTime = i - overtime
-            i = transform(c, exchangeRate, timeSpent, passedTime) + overtime
+            i = self.transform(c, exchangeRate, timeSpent, passedTime) + overtime
             print(i)
             if (i%1200==0):
-                result = pearsonCorrelationCoeffcient(elementList)
+                result = self.pearsonCorrelationCoeffcient(elementList)
                 WriteDBAndReport.createAndWriteDB(result)
                 WriteDBAndReport.readDatafromdataDB()
                 i=0
@@ -582,7 +577,7 @@ class monitorExchangeRate:
                 timeSpent =[]
                 now = datetime.now()
                 current_time = int(now.strftime("%M"))
-                elementList.x =exchangeRate
+                elementList.x = exchangeRate
                 elementList.y = timeSpent
                 if(current_time > 40):
                     timetowait = (60 -int(current_time))*60
@@ -655,6 +650,12 @@ class main:
 
             print(current_time)
             sleep(5)
+
+main = main()
+monitorExchangeRate = monitorExchangeRate()
+decisionMaking = decisionMaking()
+WriteDBAndReport = WriteDBAndReport()
+sendEmailtoTheUser = sendEmailtoTheUser()
 
 job1 = Thread(target=monitorExchangeRate.job1)
 job2 = Thread(target=main.job2)
