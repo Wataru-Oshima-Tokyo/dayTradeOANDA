@@ -13,8 +13,8 @@ from time import sleep
 import re
 import pandas as pd
 import math 
-from  sampledesu.WriteDBAndReport import writeResult, readDatafromresultDBandShowTheRateOfWin, get_connection
-import sampledesu.sendEmailtoTheUser
+from  WriteDBAndReport import writeResult, readDatafromresultDBandShowTheRateOfWin, get_connection
+import sendEmailtoTheUser
 
 
 def readDataForInverse(targethour):

@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
 from datetime import datetime
-import sampledesu.sendEmailtoTheUser
+import sendEmailtoTheUser
 import psycopg2
 
 def get_connection():

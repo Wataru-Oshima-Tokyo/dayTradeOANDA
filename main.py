@@ -5,8 +5,8 @@ import csv
 import pandas as pd
 import math 
 from threading import Thread
-import sampledesu.decisionMaking
-import sampledesu.monitorExchangeRate
+import decisionMaking
+import monitorExchangeRate
 
 def job2():
     todays_date ="0"

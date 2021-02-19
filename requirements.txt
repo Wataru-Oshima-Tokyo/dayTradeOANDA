@@ -22,3 +22,7 @@ uritemplate==3.0.1
 urllib3==1.25.10
 w3lib==1.22.0
 zope.interface==5.2.0
+./decisionMaking
+./monitorExchangeRate
+./sendEmailtoTheUser
+./WriteDBAndReport

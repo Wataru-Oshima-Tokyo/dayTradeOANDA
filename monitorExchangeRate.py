@@ -5,7 +5,7 @@ import pandas as pd
 import time
 import math
 from datetime import datetime
-from sampledesu.WriteDBAndReport import readDatafromdataDB, createAndWriteDB
+from WriteDBAndReport import readDatafromdataDB, createAndWriteDB
 # class monitorExchangeRate:
 
 
