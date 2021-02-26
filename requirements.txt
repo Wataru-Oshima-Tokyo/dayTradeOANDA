@@ -1,3 +1,4 @@
+APScheduler==3.7.0
 beautifulsoup4==4.9.3
 HTMLParser==0.0.2
 httplib2==0.19.0
@@ -22,3 +23,7 @@ uritemplate==3.0.1
 urllib3==1.25.10
 w3lib==1.22.0
 zope.interface==5.2.0
+apscheduler==3.7.0
+chromedriver-binary==89.0.4389.23.0
+fake-useragent==0.1.11
+oandapyV20==0.6.3
