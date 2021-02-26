@@ -16,8 +16,8 @@ def job2():
     newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
     londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
     todays_date = int(japanTime.strftime("%Y%m%d")) 
-    tommorow = todays_date +1
-    while (todays_date != tommorow):
+    finishTime = int(japanTime.strftime("%H")) 
+    while (finishTime != 7):
         japanTime = datetime.datetime.now()
         tokyoTime = datetime.datetime.now(tz=pytz.timezone('Asia/Tokyo'))
         newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
@@ -112,7 +112,7 @@ def job2():
             pass 
 
         print(str(current_timeJ) +": Checking time for market order...")
-        todays_date = int(japanTime.strftime("%Y%m%d")) 
+        finishTime = int(japanTime.strftime("%H")) 
         sleep(60)
 
 
@@ -128,5 +128,5 @@ def letsGetStarted():
 
 sched = BlockingScheduler()
 # # Schedules job_function to be run from mon to fri
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=0, minute=5)
+sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=7, minute=5)
 sched.start()

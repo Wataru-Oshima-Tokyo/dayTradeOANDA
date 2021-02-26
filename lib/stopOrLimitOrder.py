@@ -465,11 +465,11 @@ def job3():
     newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
     londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
     todays_date = int(japanTime.strftime("%Y%m%d")) 
-    tommorow = todays_date +1
+    finishTime = int(japanTime.strftime("%H"))
     orderId = [] 
     timetowaitForsl =0
     flag =0
-    while (todays_date != tommorow):
+    while (finishTime != 7):
         japanTime = datetime.datetime.now()
         newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
         londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
@@ -508,7 +508,7 @@ def job3():
             except:
                 orderId.append(0)
         print(str(current_timeJ) +": Checking time for stop/limit order...")
-        todays_date = int(japanTime.strftime("%Y%m%d")) 
+        finishTime = int(japanTime.strftime("%H"))
         sleep(60)
     confirmResults(orderId, japanTime, todays_date)
 

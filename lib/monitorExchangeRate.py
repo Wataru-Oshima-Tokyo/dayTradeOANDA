@@ -146,7 +146,8 @@ def job1():
     now = datetime.datetime.now()
     todays_date = int(now.strftime("%Y%m%d")) 
     tommorow = todays_date +1
-    while (todays_date != tommorow):  
+    finishTime = int(now.strftime("%H"))
+    while (finishTime != 7):  
         current_time = int(now.strftime("%M"))
         timptowait = 0
         if(current_time > 0):
@@ -164,5 +165,5 @@ def job1():
             now = datetime.datetime.now()
         time.sleep(timetowait)
         now = datetime.datetime.now()
-        todays_date = int(now.strftime("%Y%m%d"))
+        finishTime = int(now.strftime("%H"))
 
