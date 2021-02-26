@@ -496,7 +496,7 @@ def job3():
             pass
         # 東京市場の高値：安値を調べて指値注文する
         if (londonTime.hour >= 9):
-            if(londonTime.hour  <10):
+            if(londonTime.hour  <+10):
                 if(londonTime.minute <10):
                     eachId = subExecuting()
             try:
@@ -507,7 +507,7 @@ def job3():
                 orderId.append(eachId[1])
             except:
                 orderId.append(0)
-        print(str(current_timeJ) +": Cheking time for stop/limit order...")
+        print(str(current_timeJ) +": Checking time for stop/limit order...")
         todays_date = int(japanTime.strftime("%Y%m%d")) 
         sleep(60)
     confirmResults(orderId, japanTime, todays_date)

@@ -26,9 +26,9 @@ def job2():
         current_timeJ = int(japanTime.strftime("%H%M%S"))
         #10時の東京市場順張りチェック
         if (tokyoTime.hour >= 10):
-            if(tokyoTime.minute <=10):
-                lib.decisionMaking.mainexecuting("h10", japanTime, todays_date)
-                
+            if (tokyoTime.hour <= 10):
+                if(tokyoTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h10", japanTime, todays_date)
             elif(tokyoTime.hour <=11):
                 if(tokyoTime.minute <=10):
                     lib.decisionMaking.mainexecuting("h11", japanTime, todays_date)
@@ -56,9 +56,10 @@ def job2():
         
         #18時のロンドン市場順張りチェック
         if (londonTime.hour >= 10):
-            if(londonTime.minute  <=10):
-                lib.decisionMaking.mainexecuting("h18", japanTime, todays_date)
-                
+            if(londonTime.hour <=10):
+                if(londonTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h18", japanTime, todays_date)
+                    
             elif(londonTime.hour <=11):
                 if(londonTime.minute <=10):
                     lib.decisionMaking.mainexecuting("h19", japanTime, todays_date)
@@ -73,15 +74,16 @@ def job2():
 
         #21時のロンドン市場逆張りチェック
         if (londonTime.hour >= 13):
-            if (londonTime.minute < 10):
-                lib.decisionMaking.mainexecuting("h21", japanTime, todays_date)
+            if(londonTime.hour <=13):
+                if (londonTime.minute < 10):
+                    lib.decisionMaking.mainexecuting("h21", japanTime, todays_date)
             else:
                 pass
         else:
             pass 
 
         #22時のニューヨーク市場順張りチェック
-        if (newyorkTime.hour >= 9):
+        if (newyorkTime.hour >= 10):
             if(newyorkTime.hour  <=10):
                 if(newyorkTime.minute <=10):
                     lib.decisionMaking.mainexecuting("h22", japanTime, todays_date)
@@ -101,14 +103,15 @@ def job2():
 
         # 25時のニューヨーク市場逆張りチェック
         if (newyorkTime.hour >= 13):
-            if (newyorkTime.minute < 10):
-                lib.decisionMaking.mainexecuting("h01", japanTime, todays_date)
-            else:
-                pass
+            if(newyorkTime.hour <=13):
+                if (newyorkTime.minute < 10):
+                    lib.decisionMaking.mainexecuting("h01", japanTime, todays_date)
+                else:
+                    pass
         else:
             pass 
 
-        print(str(current_timeJ) +": Cheking time for market order...")
+        print(str(current_timeJ) +": Checking time for market order...")
         todays_date = int(japanTime.strftime("%Y%m%d")) 
         sleep(60)
 
