@@ -11,7 +11,7 @@ import lib
 from apscheduler.schedulers.blocking import BlockingScheduler 
 
 def job2():
-    sleep(60)
+    sleep(120)
     japanTime = datetime.datetime.now()
     newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
     londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
@@ -19,30 +19,35 @@ def job2():
     tommorow = todays_date +1
     while (todays_date != tommorow):
         japanTime = datetime.datetime.now()
+        tokyoTime = datetime.datetime.now(tz=pytz.timezone('Asia/Tokyo'))
         newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
         londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
         todays_date = str(japanTime.strftime("%Y%m%d"))  
         current_timeJ = int(japanTime.strftime("%H%M%S"))
         #10時の東京市場順張りチェック
-        if (current_timeJ >= 100500):
-            if(current_timeJ <=110000):
-                sleep(300)
+        if (tokyoTime.hour >= 10):
+            if(tokyoTime.minute <=10):
                 lib.decisionMaking.mainexecuting("h10", japanTime, todays_date)
-            elif(current_timeJ <=120000):
-                sleep(300)
-                lib.decisionMaking.mainexecuting("h11", japanTime, todays_date)
-            elif(current_timeJ <=130000):
-                sleep(300)
-                lib.decisionMaking.mainexecuting("h12", japanTime, todays_date)
-            elif(current_timeJ <=134500):
-                lib.decisionMaking.mainexecuting("h13", japanTime, todays_date)
+                
+            elif(tokyoTime.hour <=11):
+                if(tokyoTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h11", japanTime, todays_date)
+                    
+            elif(tokyoTime.hour <=12):
+                if(tokyoTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h12", japanTime, todays_date)
+                    
+            elif(tokyoTime.hour <=13):
+                if(tokyoTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h13", japanTime, todays_date)
+                    
             else:
                 pass
         else:
             pass
         #15時の東京市場逆張りチェック
         if (current_timeJ >= 140500):
-            if (current_timeJ <= 143500):
+            if (current_timeJ <= 141000):
                 lib.decisionMaking.mainexecuting("h14", japanTime, todays_date)
             else:
                 pass
@@ -52,14 +57,14 @@ def job2():
         #18時のロンドン市場順張りチェック
         if (londonTime.hour >= 10):
             if(londonTime.minute  <=10):
-                sleep(300)
                 lib.decisionMaking.mainexecuting("h18", japanTime, todays_date)
+                
             elif(londonTime.hour <=11):
-                sleep(300)
-                lib.decisionMaking.mainexecuting("h19", japanTime, todays_date)
+                if(londonTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h19", japanTime, todays_date)
+                    
             elif(londonTime.hour <=12):
-                sleep(300)
-                if (londonTime.minute <=45):
+                if (londonTime.minute <=10):
                     lib.decisionMaking.mainexecuting("h20", japanTime, todays_date)
             else:
                 pass
@@ -68,27 +73,27 @@ def job2():
 
         #21時のロンドン市場逆張りチェック
         if (londonTime.hour >= 13):
-            if (londonTime.hour < 14):
-                sleep(300)
+            if (londonTime.minute < 10):
                 lib.decisionMaking.mainexecuting("h21", japanTime, todays_date)
             else:
                 pass
         else:
             pass 
-        
 
         #22時のニューヨーク市場順張りチェック
-        if (newyorkTime.hour >= 10):
+        if (newyorkTime.hour >= 9):
             if(newyorkTime.hour  <=10):
-                sleep(300)
-                lib.decisionMaking.mainexecuting("h22", japanTime, todays_date)
+                if(newyorkTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h22", japanTime, todays_date)
+                    
             elif(newyorkTime.hour <=11):
-                sleep(300)
-                lib.decisionMaking.mainexecuting("h23", japanTime, todays_date)
+                if(newyorkTime.minute <=10):
+                    lib.decisionMaking.mainexecuting("h23", japanTime, todays_date)
+                    
             elif(newyorkTime.hour <=12):
-                if (londonTime.minute <=45):
-                    sleep(300)
+                if (newyorkTime.minute <=10):
                     lib.decisionMaking.mainexecuting("h24", japanTime, todays_date)
+                    
             else:
                 pass
         else:
@@ -96,8 +101,7 @@ def job2():
 
         # 25時のニューヨーク市場逆張りチェック
         if (newyorkTime.hour >= 13):
-            if (newyorkTime.hour < 14):
-                sleep(300)
+            if (newyorkTime.minute < 10):
                 lib.decisionMaking.mainexecuting("h01", japanTime, todays_date)
             else:
                 pass

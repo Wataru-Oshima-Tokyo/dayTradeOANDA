@@ -204,7 +204,7 @@ def stopOrder(limitPrice):
         Response_BodyLow.raise_for_status()  
         
         #結果の表示
-        print("注文が確定しました")
+        print("逆指値の注文が確定しました")
         orderIdList=[]
         idForHigh = json.dumps(Response_BodyHigh.json()['orderCreateTransaction']['id'])
         idForLow = json.dumps(Response_BodyLow.json()['orderCreateTransaction']['id'])
@@ -496,8 +496,9 @@ def job3():
             pass
         # 東京市場の高値：安値を調べて指値注文する
         if (londonTime.hour >= 9):
-            if(londonTime.hour  <=10):
-                eachId = subExecuting()
+            if(londonTime.hour  <10):
+                if(londonTime.minute <10):
+                    eachId = subExecuting()
             try:
                 orderId.append(eachId[0])
             except:
