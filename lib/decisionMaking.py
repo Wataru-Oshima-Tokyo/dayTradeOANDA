@@ -148,7 +148,7 @@ def executeBuyOrSell(pcc, targethour):
     else:
         timetowait =1500
 
-    while(timetowait>1500):
+    while(timetowait>600):
         now = datetime.datetime.now()
         current_time = now.strftime("%H%M%S")
         print("We will determine the order after" + str(timetowait) + "s")
@@ -175,7 +175,7 @@ def executeBuyOrSell(pcc, targethour):
     
     now = datetime.datetime.now()
     current_time = int(now.strftime("%M"))
-    timptowait = 0
+    timetowait = 0
     if(current_time > 0):
         timetowait = (60 -int(current_time))*60
     else:
@@ -333,132 +333,6 @@ def readData(targethour):
     conn.close()
     return pcc60min
 
-def login(browser, un, pwd):
-    browser.implicitly_wait(10)
-    username_element = browser.find_element_by_id('accountId')
-    username_element.send_keys(un)
-    username_element = browser.find_element_by_id('password')
-    username_element.send_keys(pwd)
-    username_element = browser.find_element_by_id('LoginWindowBtn').click()
-    browser.implicitly_wait(10)
-    browser.implicitly_wait(10)
-    window_after = browser.window_handles[1]
-    browser.switch_to.window(window_after)
-    sleep(5)
-    # paegSource = browser.page_source
-
-def controlBrowser(dm, targethour):
-    options = webdriver.ChromeOptions()
-    chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', None)
-    options.binary_location = chrome_bin
-    # 以下必須
-    options.add_argument('--headless') 
-    options.add_argument('--disable-gpu')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--no-sandbox')
-    # ーーーーーーーーーーーーーーーーーーーーー
-    url = 'https://demotrade.fx.dmm.com/fxcrichpresen/webrich/direct/login'
-    browser = webdriver.Chrome(executable_path="chromedriver", options=options)
-    browser.maximize_window()
-    username = 'wataruoshima@my.smccd.edu'
-    password = 'Ichiro0705'
-    browser.get(url)
-    print('ブラウザを起動しました')
-    login(browser, username, password)
-    print('ログインが完了しました')
-    timeStart = 0
-    if(dm==1):
-        try:
-            clickAsk = browser.find_element_by_xpath("//div[@uiField = 'askStreamingLabel']").click()
-            # clickAsk = browser.find_element_by_class_name('bid.button.streaming').click()
-            print("ASKを選択し、注文が完了しました")
-        except:
-            print("we cannot find ASK")
-            enterAction = ActionChains(browser)
-            tabAction = ActionChains(browser)
-            try:
-                tabAction.send_keys(Keys.RETURN)
-                tabAction.perform()
-                enterAction.perform()
-                sleep(1)
-                tabAction.perform()
-                enterAction.perform()
-            except:
-                pass
-            timeStart = 900
-    elif (dm==-1):
-        try:
-            clickBid = browser.find_element_by_xpath("//div[@uiField = 'bidStreamingLabel']").click()
-            # clickBid = browser.find_element_by_class_name('bid.button.streaming').click()
-            print("BIDを選択し、注文が完了しました")
-        except:
-            print("we cannot find BID")
-            enterAction = ActionChains(browser)
-            tabAction = ActionChains(browser)
-            try:
-                tabAction.send_keys(Keys.RETURN)
-                tabAction.perform()
-                enterAction.perform()
-                sleep(1)
-                tabAction.perform()
-                enterAction.perform()
-            except:
-                pass
-            timeStart = 900
-    else :
-        print("not buy/sell this time")
-        timeStart = 900
-    
-    sleep(0.5)
-    timetowait = 0
-    if (targethour == "h14"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-    elif (targethour == "h21"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-    elif (targethour == "h01"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-    else:
-        timetowait =900
-
-    while (timeStart <timetowait):
-        sleep(1)
-        timeStart +=1
-        try:
-            searchpips = browser.find_element_by_xpath("//span[@uiField = 'evaluationPips']").text.strip()
-        except:
-            searchpips =0
-        try:
-            searchpips = float(searchpips)
-        except:
-            searchpips =0
-        if (searchpips >= 10.0):
-            break
-        elif (searchpips <= -10.0):
-            break
-        else:
-            continue
-    try:
-        clickclose = browser.find_element_by_xpath("//button[@uifield = 'quickCloseOrderButton']").click()
-        actions = ActionChains(browser)
-        nextaction = ActionChains(browser)
-        nextaction.send_keys(Keys.RETURN)
-        actions.send_keys(Keys.TAB)
-        actions.perform()
-        actions.perform()
-        sleep(0.5)
-        nextaction.perform()
-        print("決済が完了しました")
-        sleep(2)    
-        browser.quit()
-        return searchpips
-    except:
-        print("it is already closed")
-        sleep(2)    
-        browser.quit()
-        return 0
 
 def bidOrAsk(pcc, targethour):
     rateOfWin = 0

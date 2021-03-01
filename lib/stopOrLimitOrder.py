@@ -218,7 +218,17 @@ def stopOrder(limitPrice):
                     print("Status Error from Server(raise) : %s" %Response_BodyHigh.text)
                     print("Status Error from Server(raise) : %s" %Response_BodyLow.text)
             print("エラーが発生しました。\nError(e) : %s" %e)
-
+    timetowait = 600
+    while timetowait >60:
+        timetowait -=60
+        print("We will go back in " +str(timetowait) +"s.")
+        sleep(60)
+        now = datetime.datetime.now()
+        current_time = int(now.strftime("%M"))
+        if (current_time <= 10):
+            timetowait = 0
+            break
+    sleep(timetowait)
     return orderIdList
 
 def getCandlesForStopOredr():
@@ -465,10 +475,11 @@ def job3():
     newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
     londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))
     todays_date = int(japanTime.strftime("%Y%m%d")) 
-    finishTime = int(japanTime.strftime("%H"))
+    finishTime = 0
     orderId = [] 
     timetowaitForsl =0
     flag =0
+    valid =False
     while (finishTime != 7):
         japanTime = datetime.datetime.now()
         newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
@@ -477,17 +488,20 @@ def job3():
         current_timeJ = int(japanTime.strftime("%H%M%S"))
         current_hour = int(japanTime.strftime("%H"))
         current_minute = int(japanTime.strftime("%M"))
+        if(current_timeJ > 100000):
+            valid = True
+        if (valid):
+            finishTime = int(japanTime.strftime("%H"))
          # 指値：逆指値を調べて１％以上注文が入っていたら注文を入れる(四時間ごとにチェック)
-        if ((current_hour+2)%4 ==0):
-            if (current_minute<2):
-                timetowaitForsl = 0
-                orderList = getShortAndLongCountPercent()
-                stopLimitId = orderConfirmation(orderList)
-                for i in stopLimitId:
-                    orderId.append(i)
-                timetowaitForsl = 14340
-                sleep(60)
-                flag = 1
+        if ((current_hour+2)%4 ==0 and current_minute<2):
+            timetowaitForsl = 0
+            orderList = getShortAndLongCountPercent()
+            stopLimitId = orderConfirmation(orderList)
+            for i in stopLimitId:
+                orderId.append(i)
+            timetowaitForsl = 14340
+            sleep(120)
+            flag = 1
 
         if (flag !=0):
             print("Stop or Limit function will be rebooted after " +str(timetowaitForsl) +"s")
@@ -495,20 +509,17 @@ def job3():
         else: 
             pass
         # 東京市場の高値：安値を調べて指値注文する
-        if (londonTime.hour >= 9):
-            if(londonTime.hour  <+10):
-                if(londonTime.minute <10):
-                    eachId = subExecuting()
-            try:
-                orderId.append(eachId[0])
-            except:
-                orderId.append(0)
-            try:
-                orderId.append(eachId[1])
-            except:
-                orderId.append(0)
+        if (londonTime.hour >= 10 and londonTime.hour <=10 and londonTime.minute <10):
+                eachId = subExecuting()
+                try:
+                    orderId.append(eachId[0])
+                except:
+                    orderId.append(0)
+                try:
+                    orderId.append(eachId[1])
+                except:
+                    orderId.append(0)
         print(str(current_timeJ) +": Checking time for stop/limit order...")
-        finishTime = int(japanTime.strftime("%H"))
         sleep(60)
     confirmResults(orderId, japanTime, todays_date)
 
