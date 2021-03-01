@@ -6,6 +6,7 @@ from time import sleep
 import time
 import math
 import datetime
+import sqlite3
 from .WriteDBAndReport import readDatafromdataDB, createAndWriteDB
 # class monitorExchangeRate:
 
