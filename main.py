@@ -126,7 +126,8 @@ def letsGetStarted():
 
 
 
-sched = BlockingScheduler()
-# # Schedules job_function to be run from mon to fri
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=7, minute=5)
-sched.start()
+# sched = BlockingScheduler()
+# # # Schedules job_function to be run from mon to fri
+# sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=7, minute=5)
+# sched.start()
+letsGetStarted()
