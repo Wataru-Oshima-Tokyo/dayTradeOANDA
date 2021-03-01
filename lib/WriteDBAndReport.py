@@ -101,6 +101,7 @@ def readDatafromresultDBandShowTheRateOfWin():
 
 def writeResult(rate, now, todays_date):
     #日付を取得
+    rate = float(rate)
     current_time = 'h' + now.strftime("%H")
     # result.dbを作成する
     # すでに存在していれば、それにアスセスする。
