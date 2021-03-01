@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from selenium import webdriver
 import lxml
 from selenium.webdriver.common.keys import Keys
@@ -305,7 +305,7 @@ def readDataForInverse(targethour):
 
 
 def readData(targethour):
-    now = datetime.now()
+    now = datetime.datetime.now()
     todays_date = str(now.strftime("%Y%m%d")) 
     conn = get_connection()
     cur = conn.cursor()
@@ -412,13 +412,13 @@ def controlBrowser(dm, targethour):
     sleep(0.5)
     timetowait = 0
     if (targethour == "h14"):
-        now = datetime.now()
+        now = datetime.datetime.now()
         timetowait = (60 - int(now.strftime("%M")))*60
     elif (targethour == "h21"):
-        now = datetime.now()
+        now = datetime.datetime.now()
         timetowait = (60 - int(now.strftime("%M")))*60
     elif (targethour == "h01"):
-        now = datetime.now()
+        now = datetime.datetime.now()
         timetowait = (60 - int(now.strftime("%M")))*60
     else:
         timetowait =900
@@ -493,6 +493,6 @@ def mainexecuting(targethour, now, todays_date):
         sendEmailtoTheUser.main(showResult, title)
 
 def temp():
-    now = datetime.now()
+    now = datetime.datetime.now()
     todays_date = str(now.strftime("%Y%m%d")) 
     mainexecuting('h17', now, todays_date)
