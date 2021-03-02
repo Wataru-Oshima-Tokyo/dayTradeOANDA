@@ -8,6 +8,7 @@ import math
 import datetime
 import sqlite3
 from .WriteDBAndReport import readDatafromdataDB, createAndWriteDB
+from .sendEmailtoTheUser import main
 # class monitorExchangeRate:
 
 def getCandles():

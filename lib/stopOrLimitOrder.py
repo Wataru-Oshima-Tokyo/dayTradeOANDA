@@ -124,7 +124,6 @@ def stopOrder(limitPrice):
         orderUnits =math.floor(orderUnits)
     except:
         orderUnits = 1
-    orderUnits = 100
     Order_unitsForAsk = orderUnits*5
     Order_unitsForBid = -1*orderUnits*5
     highestPriceinTokyo = limitPrice[0]
