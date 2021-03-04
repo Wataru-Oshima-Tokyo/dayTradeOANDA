@@ -6,10 +6,10 @@ import psycopg2
 
 def get_connection():
     return psycopg2.connect(
-        host="ec2-18-207-95-219.compute-1.amazonaws.com",
-        database="d8slcm55ucqkr9",
-        user="xtoknhsahdbqib",
-        password="e98cf3a78fe29914fec9c9a349fe517b61d31cdcf9a54520fe6f3a43eee1fab3",
+        host="ec2-50-16-108-41.compute-1.amazonaws.com",
+        database="d382g5qv7f30fj",
+        user="ayeviyfmhbuktr",
+        password="46cee268a578eeb2c75271334baf539bf3cedaa9fb508f52a04e26e069c29d72",
         port="5432")
 # def get_connection():
 #     return psycopg2.connect(

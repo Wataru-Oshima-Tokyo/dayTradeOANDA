@@ -18,8 +18,8 @@ def getCandles():
     date_from =""
     date_to =""
         
-    API_access_token = "175cc666c9a97c267b957da004cc83eb-9e9d5b50095e0fd1cdc163f494a9472a"
-    accountID = "101-001-18171827-001"
+    API_access_token = "aeb76294b5192c55779fef4fe56eaf75-45bb64a56aad2a6b6dd22062e59027e3"
+    accountID = "101-001-18324553-001"
     # URLの設定　（デモ口座用非ストリーミングURL）
     API_URL =  "https://api-fxpractice.oanda.com"
     # 通貨ペア
@@ -72,7 +72,7 @@ def getCandles():
         print("直前30分間のPCC")
         pcc30min = getEachPCC(ClassList, maximum, 360)
         print("直前60分間のPCC")
-        pcc60min = getEachPCC(ClassList, maximum,maximum)
+        pcc60min = getEachPCC(ClassList, maximum, maximum)
         pcctotal = pcc1min*0.03 + pcc5min*0.07 + pcc10min*0.15 +pcc30min*0.25 + pcc60min*0.5
         pcctotal = str(pcctotal)
         print("I can conclude that the pcc during the period is " + pcctotal)
@@ -152,26 +152,20 @@ def job1():
     valid = False
     while (finishTime != 7):  
         current_timeJ = int(now.strftime("%H%M%S"))
+        current_minute = int(now.strftime("%M"))
+
         if(current_timeJ > 100000):
             valid = True
         if (valid):
             finishTime = int(now.strftime("%H"))
+
+    
+        if(current_minute <59 and current_minute >= 58):
+            pcc = getCandles()
+            createAndWriteDB(pcc)
+            readDatafromdataDB()
             
-        current_time = int(now.strftime("%M"))
-        timptowait = 0
-        if(current_time > 0):
-            timetowait = (60 -int(current_time))*60
-        else:
-            timetowait = 3599
-        pcc = getCandles()
-        createAndWriteDB(pcc)
-        readDatafromdataDB()
-        print("I will wait for " + str(timetowait) +"s")
-        while (timetowait >600):
-            time.sleep(600)
-            timetowait -=600
-            print("We will take pcc again after " + str(timetowait) +"s")
-            now = datetime.datetime.now()
-        time.sleep(timetowait)
+        print("Checking time for pcc: " + str(current_timeJ))
         now = datetime.datetime.now()
+        sleep(60)
 

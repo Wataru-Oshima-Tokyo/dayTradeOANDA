@@ -2,8 +2,8 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime
 
-my_addr = "wataru.pokemon.go.0722@gmail.com"
-my_pass = "oqficpdltqyrxklr"
+my_addr = "bigisland.business@gmail.com"
+my_pass = "vtimcmvrnktbxyhp"
 # メッセージの作成
 def create_message(from_addr, to_addr, subject, body_txt):
     msg = MIMEText(body_txt)

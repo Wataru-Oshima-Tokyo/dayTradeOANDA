@@ -1,19 +1,9 @@
 import datetime
-from selenium import webdriver
-import lxml
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
 import requests
 from time import sleep
 import re
 import pandas as pd
 import math 
-import chromedriver_binary
 import os
 import json
 from oandapyV20 import API
@@ -29,8 +19,8 @@ from . import sendEmailtoTheUser
 
 
 def executeBuyOrSell(pcc, targethour):
-    access_token = "175cc666c9a97c267b957da004cc83eb-9e9d5b50095e0fd1cdc163f494a9472a"
-    accountID = "101-001-18171827-001"
+    access_token = "aeb76294b5192c55779fef4fe56eaf75-45bb64a56aad2a6b6dd22062e59027e3"
+    accountID = "101-001-18324553-001"
 
     api = API(access_token=access_token, environment="practice")
 
@@ -56,7 +46,7 @@ def executeBuyOrSell(pcc, targethour):
         orderUnits =math.floor(orderUnits)
     except:
         orderUnits = 1
-    Order_units = orderUnits*5
+    Order_units = orderUnits*25
     if (pcc<0):
         Order_units = -1* Order_units
         print("Bidで注文します")
@@ -134,19 +124,7 @@ def executeBuyOrSell(pcc, targethour):
             
             print("エラーが発生しました。\nError(e) : %s" %e)
     
-    timetowait = 0
-    if (targethour == "h14"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-    elif (targethour == "h21"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-    elif (targethour == "h01"):
-        now = datetime.datetime.now()
-        timetowait = (60 - int(now.strftime("%M")))*60
-        timetowait += 10800
-    else:
-        timetowait =1500
+    timetowait = 1500
 
     while(timetowait>600):
         now = datetime.datetime.now()
@@ -172,147 +150,14 @@ def executeBuyOrSell(pcc, targethour):
         tdr =tradeDetail["trade"]["realizedPL"]
     except:
         tdr = 0
-    
-    now = datetime.datetime.now()
-    current_time = int(now.strftime("%M"))
-    timetowait = 0
-    if(current_time > 0):
-        timetowait = (60 -int(current_time))*60
-    else:
-        timetowait = 3600
-    print("I will wati for " + str(timetowait) +"s")
-    while timetowait >600:
-        timetowait -=600
-        print("Market order function will be rebooted after" +str(timetowait) +"s.")
-        sleep(600)
-        now = datetime.datetime.now()
-        current_time = int(now.strftime("%M"))
-        if (current_time <= 10):
-            timetowait = 0
-            break
-    sleep(timetowait)
     return tdr
-
-
-def readDataForInverse(targethour):
-    overallPcc = 0
-    eachPcc = 0
-    if (targethour == "h14"):
-        now = datetime.datetime.now()
-        todays_date = str(now.strftime("%Y%m%d")) 
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM data')
-        start = 10
-        dividedby = 0
-        for row in cur:
-            if (row[1] == todays_date):
-                total = "h" + str(start)
-                if (row[2] ==total):
-                    start +=1
-                    dividedby +=1
-                    try:
-                        eachPcc = float(row[3])
-                        print("conversion sucess!!")
-                    except:
-                        eachPcc =0
-                    overallPcc += eachPcc
-                else:
-                    pass
-            else:
-                pass
-        cur.close()
-        conn.close()
-        try:
-            overallPcc = -1*(overallPcc/dividedby)
-        except:
-            overallPcc = 0
-        print("The total pcc is from " + str(dividedby) + " hours ago to now is " +  str(overallPcc))
-        return overallPcc   
-    elif (targethour=="h21"):
-        now = datetime.datetime.now()
-        todays_date = str(now.strftime("%Y%m%d")) 
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM data')
-        start = 18
-        dividedby = 0
-        for row in cur:
-        #you can modify here h13 ->sth
-            if (row[1] == todays_date):
-                total = "h" + str(start)
-                if (row[2] ==total):
-                    start +=1
-                    dividedby +=1
-                    try:
-                        eachPcc = float(row[3])
-                        print("conversion sucess!!")
-                    except:
-                        eachPcc =0
-                    overallPcc += eachPcc
-                else:
-                    pass
-            else:
-                pass
-        try:
-            overallPcc = -1*(overallPcc/dividedby)
-        except:
-            overallPcc = 0
-        cur.close()
-        conn.close()
-        print("The total pcc is from " + str(dividedby) + " hours ago to now is " +  str(overallPcc))
-        return overallPcc   
-    elif (targethour=="h01"):
-        now = datetime.datetime.now()
-        todays_date = int(now.strftime("%Y%m%d")) -1
-        todays_date = str(todays_date)
-        conn = get_connection()
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM data')
-        start = 23
-        dividedby = 0
-        for row in cur:
-        #you can modify here h13 ->sth
-            if (row[1] == todays_date):
-                if (start >=24):
-                    total = "h" + str(start-24)
-                    now = datetime.datetime.now()
-                    todays_date = str(now.strftime("%Y%m%d")) 
-                else:
-                    total = "h" + str(start)
-                if (row[2] ==total):
-                    start +=1
-                    dividedby +=1
-                    try:
-                        eachPcc = float(row[3])
-                    except:
-                        eachPcc =0
-                    overallPcc += eachPcc
-                else:
-                    pass
-            else:
-                pass
-        try:
-            overallPcc = -1*(overallPcc/dividedby)
-        except:
-            overallPcc = 0
-        cur.close()
-        conn.close()
-        print("The total pcc is from " + str(dividedby) + " hours ago to now is " +  str(overallPcc))
-        return overallPcc
-    else:
-        pass 
-
 
 def readData(targethour):
     now = datetime.datetime.now()
     todays_date = str(now.strftime("%Y%m%d")) 
     conn = get_connection()
     cur = conn.cursor()
-    # dbをpandasで読み出す。
-    # df = pd.read_sql('SELECT * FROM data', conn)
     cur.execute('SELECT * FROM data')
-    # print(cur.fetchall())
     pcc60min =0.0
     for row in cur:
         if(todays_date == row[1]):
@@ -351,22 +196,10 @@ def bidOrAsk(pcc, targethour):
 
 def mainexecuting(targethour, now, todays_date):
     # 実行   
-    if (targethour =="h14"):
-        pcc = readDataForInverse(targethour)
-    elif(targethour =="h21"):
-        pcc = readDataForInverse(targethour)
-    elif(targethour =="h01"):
-        pcc = readDataForInverse(targethour)
-    else:
-        pcc = readData(targethour)
+    pcc = readData(targethour)
     percent = bidOrAsk(pcc, targethour)
     if (percent !=0):
         writeResult(percent, now, todays_date)
         showResult = readDatafromresultDBandShowTheRateOfWin()
         title = "現在の勝率"
         sendEmailtoTheUser.main(showResult, title)
-
-def temp():
-    now = datetime.datetime.now()
-    todays_date = str(now.strftime("%Y%m%d")) 
-    mainexecuting('h17', now, todays_date)

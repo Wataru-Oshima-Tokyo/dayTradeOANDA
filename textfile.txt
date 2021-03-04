@@ -1,0 +1,10 @@
+GetData
+select*from data where Date=(select to_char(current_date, 'YYYYMMDD'));
+GetResult
+select*from percent where Date=(select to_char(current_date, 'YYYYMMDD'));
+
+Apschedular
+Saturday stop
+[ $(date +%u) = 5 ] && heroku ps:scale web=0
+Monday start
+[ $(date +%u) = 7 ] && heroku ps:scale web=1

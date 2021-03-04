@@ -13,7 +13,6 @@ python-dateutil==2.8.1
 queuelib==1.5.0
 requests==2.24.0
 rsa==4.7.1
-selenium==3.141.0
 service-identity==18.1.0
 six==1.15.0
 soupsieve==2.0.1
@@ -24,6 +23,5 @@ urllib3==1.25.10
 w3lib==1.22.0
 zope.interface==5.2.0
 apscheduler==3.7.0
-chromedriver-binary==89.0.4389.23.0
 fake-useragent==0.1.11
 oandapyV20==0.6.3
