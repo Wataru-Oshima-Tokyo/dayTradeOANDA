@@ -152,7 +152,15 @@ def createAndWriteDB(pcc):
     todays_date = str(now.strftime("%Y%m%d")) 
     # 日付data.dbを作成する
     # すでに存在していれば、それにアスセスする。
-    current_time = 'h' + now.strftime("%H")
+    targetTime = int(now.strftime("%H"))+1
+    if(targetTime == 24):
+            todays_date = str(now.strftime("%Y%m%d")+datetime.timedelta(hours=1)) 
+            targetTime = '00'
+    else:
+        if(targetTime<10):
+            targetTime = '0' + str(targetTime)
+        targetTime = str(targetTime)
+    current_time = 'h' + targetTime
     conn = get_connection()
     # sqliteを操作するカーソルオブジェクトを作成
     cur = conn.cursor()
