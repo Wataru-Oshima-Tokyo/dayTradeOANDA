@@ -154,7 +154,8 @@ def createAndWriteDB(pcc):
     # すでに存在していれば、それにアスセスする。
     targetTime = int(now.strftime("%H"))+1
     if(targetTime == 24):
-            todays_date = str(now.strftime("%Y%m%d")+datetime.timedelta(hours=1)) 
+            now = now + datetime.timedelta(hours=1) 
+            todays_date = str(now.strftime("%Y%m%d")) 
             targetTime = '00'
     else:
         if(targetTime<10):
