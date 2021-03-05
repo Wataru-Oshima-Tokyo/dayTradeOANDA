@@ -14,8 +14,6 @@ def getTargetHour(date):
     now = date
     todays_date = str(now.strftime("%Y%m%d"))
     targetTime =  int(now.strftime("%H"))
-    # 日付data.dbを作成する
-    # すでに存在していれば、それにアスセスする。
     if(targetTime <10):
         current_time = 'h0' + str(targetTime)
     else:
@@ -23,7 +21,6 @@ def getTargetHour(date):
     return current_time
 
 def job2():
-    # sleep(120)
     japanTime = datetime.datetime.now()
     newyorkTime = datetime.datetime.now(tz=pytz.timezone('US/Eastern'))
     londonTime = datetime.datetime.now(tz=pytz.timezone('Europe/London'))

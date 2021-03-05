@@ -7,7 +7,7 @@ import time
 import math
 import datetime
 import sqlite3
-from .WriteDBAndReport import readDatafromdataDB, createAndWriteDB
+from .WriteDBAndReport import readDatafromdataDB, createAndWriteDB, readDatafromresultDBandShowTheRateOfWin
 from .sendEmailtoTheUser import main
 # class monitorExchangeRate:
 
@@ -163,8 +163,12 @@ def job1():
         if(current_minute <59 and current_minute >= 58):
             pcc = getCandles()
             createAndWriteDB(pcc)
+        
+        if(current_timeJ> 0 and current_timeJ<120):
             readDatafromdataDB()
-            
+            showResult = readDatafromresultDBandShowTheRateOfWin()
+            title = "現在の勝率"
+            main(showResult, title)
         print("Checking time for pcc: " + str(current_timeJ))
         now = datetime.datetime.now()
         sleep(60)

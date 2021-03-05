@@ -53,9 +53,9 @@ def executeBuyOrSell(pcc, targethour):
     else:
         print("ASKで注文します")
     Pip_location = -2
-    TP_pips = 10 #pips
+    TP_pips = 11 #pips
     TP_distance = TP_pips * (10**Pip_location)
-    SL_pips = 10 #pips
+    SL_pips = 11 #pips
     SL_distance = SL_pips * (10**Pip_location)         
     
     data_Market = {
@@ -200,6 +200,6 @@ def mainexecuting(targethour, now, todays_date):
     percent = bidOrAsk(pcc, targethour)
     if (percent !=0):
         writeResult(percent, now, todays_date)
-        showResult = readDatafromresultDBandShowTheRateOfWin()
-        title = "現在の勝率"
-        sendEmailtoTheUser.main(showResult, title)
+        # showResult = readDatafromresultDBandShowTheRateOfWin()
+        # title = "現在の勝率"
+        # sendEmailtoTheUser.main(showResult, title)
