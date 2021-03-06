@@ -150,7 +150,11 @@ def job1():
     tommorow = todays_date +1
     finishTime = 0
     valid = False
-    while (finishTime != 7):  
+    if(todays_date >20210314 and todays_date < 20211107):
+        endTime = 6
+    else:
+        endTime = 7
+    while (finishTime != endTime):  
         current_timeJ = int(now.strftime("%H%M%S"))
         current_minute = int(now.strftime("%M"))
 
@@ -163,13 +167,13 @@ def job1():
         if(current_minute <59 and current_minute >= 58):
             pcc = getCandles()
             createAndWriteDB(pcc)
-        
-        if(current_timeJ> 0 and current_timeJ<120):
+        if(finishTime ==23 and (current_minute<53 and current_minute>48)):
             readDatafromdataDB()
             showResult = readDatafromresultDBandShowTheRateOfWin()
             title = "現在の勝率"
             main(showResult, title)
+            sleep(300)
         print("Checking time for pcc: " + str(current_timeJ))
         now = datetime.datetime.now()
         sleep(60)
-
+    

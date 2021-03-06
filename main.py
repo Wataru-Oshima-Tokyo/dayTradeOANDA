@@ -27,7 +27,11 @@ def job2():
     todays_date = int(japanTime.strftime("%Y%m%d")) 
     finishTime = 0; 
     flag = False
-    while (finishTime != 7):
+    if(todays_date >20210314 and todays_date < 20211107):
+        endTime = 6
+    else:
+        endTime = 7
+    while (finishTime != endTime):
         japanTime = datetime.datetime.now()
         tokyoTime = datetime.datetime.now(tz=pytz.timezone('Asia/Tokyo'))
         todays_date = str(japanTime.strftime("%Y%m%d"))  
@@ -52,10 +56,17 @@ def letsGetStarted():
     jobfirst.start()
     jobsecond.start()
 
+def hello():
+    print(" this works!")
 
 
-# sched = BlockingScheduler()
-# # # Schedules job_function to be run from mon to fri
-# sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=7, minute=5)
-# sched.start()
-letsGetStarted()
+sched = BlockingScheduler()
+# # Schedules job_function to be run from mon to fri
+now = datetime.datetime.now()
+startTime = int(now.strftime("%m%d"))
+if(startTime > 314 and startTime<1107):
+    hour =6
+else:
+    hour =7
+sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=5)
+sched.start()

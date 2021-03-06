@@ -200,6 +200,3 @@ def mainexecuting(targethour, now, todays_date):
     percent = bidOrAsk(pcc, targethour)
     if (percent !=0):
         writeResult(percent, now, todays_date)
-        # showResult = readDatafromresultDBandShowTheRateOfWin()
-        # title = "現在の勝率"
-        # sendEmailtoTheUser.main(showResult, title)
