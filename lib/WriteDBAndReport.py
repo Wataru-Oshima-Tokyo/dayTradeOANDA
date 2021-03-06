@@ -1,6 +1,6 @@
 import csv
 import pandas as pd
-from datetime import datetime
+import datetime
 from . import sendEmailtoTheUser
 import psycopg2
 
@@ -24,7 +24,7 @@ def reportThePCC(content):
     sendEmailtoTheUser.main(content, title)
 
 def readDatafromdataDB():
-    now = datetime.now()
+    now = datetime.datetime.now()
     todays_date = str(now.strftime("%Y%m%d")) 
     conn = get_connection()
     cur = conn.cursor()
@@ -148,7 +148,7 @@ def writeResult(rate, now, todays_date):
 def createAndWriteDB(pcc):
     #日付を取得
     pcc =str(pcc)
-    now = datetime.now()
+    now = datetime.datetime.now()
     todays_date = str(now.strftime("%Y%m%d")) 
     # 日付data.dbを作成する
     # すでに存在していれば、それにアスセスする。
