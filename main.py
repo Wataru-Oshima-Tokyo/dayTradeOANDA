@@ -71,5 +71,4 @@ sched = BlockingScheduler()
 # sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=5)
 # sched.start()
 
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri')
-sched.start()
+letsGetStarted()
