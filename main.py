@@ -61,12 +61,15 @@ def hello():
 
 
 sched = BlockingScheduler()
-# # Schedules job_function to be run from mon to fri
-now = datetime.datetime.now()
-startTime = int(now.strftime("%m%d"))
-if(startTime > 314 and startTime<1107):
-    hour =6
-else:
-    hour =7
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=5)
+# # # Schedules job_function to be run from mon to fri
+# now = datetime.datetime.now()
+# startTime = int(now.strftime("%m%d"))
+# if(startTime > 314 and startTime<1107):
+#     hour =6
+# else:
+#     hour =7
+# sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=5)
+# sched.start()
+
+sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri')
 sched.start()
