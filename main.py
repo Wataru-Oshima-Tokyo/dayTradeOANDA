@@ -64,9 +64,9 @@ sched = BlockingScheduler()
 # # Schedules job_function to be run from mon to fri
 now = datetime.datetime.now()
 startTime = int(now.strftime("%m%d"))
-if(startTime > 314 and startTime<1107):
-    hour =6
-else:
-    hour =7
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=30)
+# if(startTime > 314 and startTime<1107):
+#     hour =6
+# else:
+#     hour =7
+sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour='0-23', minute='0-59')
 sched.start()
