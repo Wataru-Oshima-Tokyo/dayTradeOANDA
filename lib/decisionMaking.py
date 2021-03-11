@@ -129,7 +129,7 @@ def executeBuyOrSell(pcc, targethour):
     while(timetowait>600):
         now = datetime.datetime.now()
         current_time = now.strftime("%H%M%S")
-        print("We will determine the order after" + str(timetowait) + "s")
+        print("We will determine the order after " + str(timetowait) + "s")
         sleep(600)
         timetowait -=600
 

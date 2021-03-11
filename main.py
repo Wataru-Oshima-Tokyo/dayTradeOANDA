@@ -73,6 +73,6 @@ if(startTime > 314 and startTime<1107):
     hour =6
 else:
     hour =7
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=5)
+sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=3)
 sched.start()
 
