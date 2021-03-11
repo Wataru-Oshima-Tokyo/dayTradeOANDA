@@ -52,9 +52,9 @@ def job2():
 
 def letsGetStarted():
     jobfirst = Thread(target=lib.monitorExchangeRate.job1)
-    jobsecond = Thread(target=job2)
     jobfirst.start()
-    jobsecond.start()
+    job2()
+
 
 def hello():
     print(" this works!")
