@@ -61,7 +61,8 @@ def letsGetStarted():
         pass
 
 def hello():
-    print(" this works!")
+    print("24 hours!")
+    sleep(600)
 
 
 sched = BlockingScheduler()
@@ -73,10 +74,11 @@ if(whatDate == "Saturday" or whatDate == "Sunday"):
     pass
 else:
     letsGetStarted()
+
 if(startTime > 314 and startTime<1107):
     hour =6
 else:
     hour =7
-sched.add_job(letsGetStarted, 'cron',  day_of_week='mon-fri', hour=hour, minute=3)
+sched.add_job(hello, 'cron',  day_of_week='mon-fri', hour=hour, minute=28)
 sched.start()
 
