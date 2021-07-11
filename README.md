@@ -45,6 +45,7 @@
 # step 4 
   ## clone this repo and change the variables in constVariables.py
   ### constVariables.py
+  ![](img/constVariables.png)
   
 # step 5
   ## push the updated app to the heroku 
