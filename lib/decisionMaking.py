@@ -184,10 +184,10 @@ def bidOrAsk(pcc, targethour):
     rateOfWin = 0
     pcc = float(pcc)
     # I guess that you can modify the percent here as you see the pcc
-    if (pcc>0):
+    if (pcc>10):
         pcc =1
         rateOfWin = float(executeBuyOrSell(pcc, targethour))
-    elif (pcc<0):
+    elif (pcc<-10):
         pcc=-1
         rateOfWin = float(executeBuyOrSell(pcc, targethour))
     else: 
