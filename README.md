@@ -10,6 +10,10 @@
   
   ![](img/heroku2.png)
   
+  ![](img/heroku9.png)
+  
+  ![](img/heroku10.png)
+  
   ![](img/heroku4.png)
   
   ![](img/heroku5.png)
