@@ -1,9 +1,18 @@
 # dayTradeOANDA
 
-# step1
+# step 1
+  ## create a google accout and set the gmail app password 
+      follow the below steps and get the app password
+      https://support.google.com/mail/answer/185833?hl=ja#zippy=
+# step 2
+  ## create a new heroku accout
+  
+# step 3 
+  ## create your oanda api for practice
+# step 4 
+  ## clone this repo and change the variables in constVariables.py
+  
+# step 5
+  ## push the updated app to the heroku 
 
-# step2
-
-# step3 
-
-# step4 
+# Done! Now you are all set!
