@@ -18,18 +18,19 @@
   
   ![](img/heroku7.png)
   
-  check the info for your database
+  ### check the info for your database
   ![](img/heroku8.png)
   
 # step 3 
   ## create your oanda api for practice
-  check the access-token and account ID
+  ### check the access-token and account ID
   ![](img/oanda.png)
 # step 4 
   ## clone this repo and change the variables in constVariables.py
+  ### constVariables.py
   
 # step 5
   ## push the updated app to the heroku 
-  type the below commands
+  ### type the below commands
   ![](img/heroku3.png)
 # Done! Now you are all set!
