@@ -10,19 +10,29 @@
   ![](img/heroku1.png)
   #### 2
   ![](img/heroku2.png)
-  #### 3
-  ![](img/heroku9.png)
   
   ### add the database on your app
   #### 1
-  ![](img/heroku10.png)
+  ![](img/heroku9.png)
+  
+  
   #### 2
-  ![](img/heroku4.png)
+  ![](img/heroku10.png)
+  
+  
   #### 3
-  ![](img/heroku5.png)
+  ![](img/heroku4.png)
+  
+  
   #### 4
-  ![](img/heroku6.png)
+  ![](img/heroku5.png)
+  
+  
   #### 5
+  ![](img/heroku6.png)
+  
+  
+  #### 6
   ![](img/heroku7.png)
   
   ### check the info for your database
