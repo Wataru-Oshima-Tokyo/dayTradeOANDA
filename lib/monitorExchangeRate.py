@@ -9,6 +9,7 @@ import datetime
 import sqlite3
 from .WriteDBAndReport import readDatafromdataDB, createAndWriteDB, readDatafromresultDBandShowTheRateOfWin
 from .sendEmailtoTheUser import main
+from . import constVariables
 # class monitorExchangeRate:
 
 def getCandles():
@@ -17,9 +18,8 @@ def getCandles():
     winterOrSummer = int(now.strftime("%m%d"))
     date_from =""
     date_to =""
-        
-    API_access_token = "aeb76294b5192c55779fef4fe56eaf75-45bb64a56aad2a6b6dd22062e59027e3"
-    accountID = "101-001-18324553-001"
+    API_access_token = constVariables.CVAL.access_token
+    accountID = constVariables.CVAL.accountID
     # URLの設定　（デモ口座用非ストリーミングURL）
     API_URL =  "https://api-fxpractice.oanda.com"
     # 通貨ペア

@@ -3,21 +3,15 @@ import pandas as pd
 import datetime
 from . import sendEmailtoTheUser
 import psycopg2
+from . import constVariables
 
 def get_connection():
     return psycopg2.connect(
-        host="ec2-50-16-108-41.compute-1.amazonaws.com",
-        database="d382g5qv7f30fj",
-        user="ayeviyfmhbuktr",
-        password="46cee268a578eeb2c75271334baf539bf3cedaa9fb508f52a04e26e069c29d72",
-        port="5432")
-# def get_connection():
-#     return psycopg2.connect(
-#         host="ec2-54-145-249-177.compute-1.amazonaws.com",
-#         database="de9plpmh2fjj3f",
-#         user="xwhjswdrcuymes",
-#         password="2d6ceea971ed2e71ec3aa82f7b9fa570ff3f697fc57bea8e9c899877befe4d7a",
-#         port="5432")
+        host = constVariables.CVAL.host,
+        database = constVariables.CVAL.database,
+        user = constVariables.CVAL.user,
+        password = constVariables.CVAL.password,
+        port = constVariables.CVAL.port)
 
 def reportThePCC(content):
     title = "PCC"
@@ -37,14 +31,7 @@ def readDatafromdataDB():
             content = content + "Time: "+ str(row[2]) +" PCC in 60 minutes: " +str(row[3]) +"\n"
         else:
             pass
-    # try:
-    #     # df.to_csv('/Users/wataruoshima/Desktop/Scraping/daytradedemowithDB/' + 'data' + ".csv", encoding='utf_8_sig')
-    #     print("successfully emailed to the user")
-    # except:
-    #     print("failed to convert to csv file")
     reportThePCC(content)
-    # cur.execute('SELECT * FROM data')
-    # print(cur.fetchall())
     cur.close()
     conn.close()
 
@@ -54,7 +41,6 @@ def readDatafromresultDB():
     # dbをpandasで読み出す。
     df = pd.read_sql('SELECT * FROM percent', conn)
     try:
-        # df.to_csv('/Users/wataruoshima/Desktop/Scraping/daytradedemowithDB/' + 'result' + ".csv", encoding='utf_8_sig')
         print("successfully converted to csv file")
     except:
         print("failed to convert to csv file")
@@ -90,11 +76,6 @@ def readDatafromresultDBandShowTheRateOfWin():
     rateOfWin = (totalWin/toalGame)*100
     msg = "So far you have tried " + str(toalGame) + " times and won " +str(totalWin) +" times.\nSo your rate of win is " + str(rateOfWin) + "%."
     print(msg)
-    # try:
-    #     df.to_csv('/Users/wataruoshima/Desktop/Scraping/daytradedemowithDB/' + 'result' + ".csv", encoding='utf_8_sig')
-    #     print("successfully converted to csv file")
-    # except:
-    #       print("failed to convert to csv file")
     cur.close()
     conn.close()
     return msg

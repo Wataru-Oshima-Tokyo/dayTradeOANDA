@@ -16,11 +16,12 @@ import oandapyV20.endpoints.trades as trades
 #local package
 from  .WriteDBAndReport import writeResult, readDatafromresultDBandShowTheRateOfWin, get_connection
 from . import sendEmailtoTheUser
+from . import constVariables
 
 
 def executeBuyOrSell(pcc, targethour):
-    access_token = "aeb76294b5192c55779fef4fe56eaf75-45bb64a56aad2a6b6dd22062e59027e3"
-    accountID = "101-001-18324553-001"
+    access_token = constVariables.CVAL.access_token
+    accountID = constVariables.CVAL.accountID
 
     api = API(access_token=access_token, environment="practice")
 

@@ -1,9 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime
-
-my_addr = "bigisland.business@gmail.com"
-my_pass = "vtimcmvrnktbxyhp"
+from . import constVariables
+my_addr = constVariables.CVAL.my_addr
+my_pass = constVariables.CVAL.my_pass
 # メッセージの作成
 def create_message(from_addr, to_addr, subject, body_txt):
     msg = MIMEText(body_txt)
