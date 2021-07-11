@@ -50,5 +50,5 @@
 # step 5
   ## push the updated app to the heroku 
   ### type the below commands
-  ![](img/heroku3.png)
+  ![](img/heroku3.2.png)
 # Done! Now you are all set!
