@@ -6,7 +6,12 @@
       https://support.google.com/mail/answer/185833?hl=ja#zippy=
 # step 2
   ## create a new heroku accout
-  ![alt text](img/heroku1.png)
+  ![](img/heroku1.png)
+  ![](img/heroku2.png)
+  ![](img/heroku3.png)
+  ![](img/heroku4.png)
+  ![](img/heroku5.png)
+  ![](img/heroku6.png)
 # step 3 
   ## create your oanda api for practice
 # step 4 
