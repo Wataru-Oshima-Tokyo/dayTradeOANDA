@@ -5,21 +5,24 @@
       follow the below steps and get the app password
       https://support.google.com/mail/answer/185833?hl=ja#zippy=
 # step 2
-  ## create a new heroku accout
+  ### create a new heroku accout
+  #### 1
   ![](img/heroku1.png)
-  
+  #### 2
   ![](img/heroku2.png)
-  
+  #### 3
   ![](img/heroku9.png)
   
+  ### add the database on your app
+  #### 1
   ![](img/heroku10.png)
-  
+  #### 2
   ![](img/heroku4.png)
-  
+  #### 3
   ![](img/heroku5.png)
-  
+  #### 4
   ![](img/heroku6.png)
-  
+  #### 5
   ![](img/heroku7.png)
   
   ### check the info for your database
