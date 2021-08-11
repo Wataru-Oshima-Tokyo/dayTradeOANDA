@@ -39,7 +39,7 @@
   ![](img/heroku8.png)
   
 # step 3 
-  ## create your oanda api for practice
+  ## create your oanda api for practice(https://www1.oanda.com/)
   ### check the access-token and account ID
   ![](img/oanda.png)
 # step 4 
